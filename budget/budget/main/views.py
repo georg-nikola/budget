@@ -63,7 +63,7 @@ class IncomesView(auth_mixins.LoginRequiredMixin, views.ListView):
     context_object_name = 'incomes'
 
 
-class IncomeCreateView(views.CreateView):
+class IncomeCreateView(auth_mixins.LoginRequiredMixin, views.CreateView):
     model = Income
     template_name = 'main/income_create.html'
     form_class = CreateIncomeForm
@@ -75,26 +75,26 @@ class IncomeCreateView(views.CreateView):
         return kwargs
 
 
-class IncomeEditView(views.UpdateView):
+class IncomeEditView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = Income
     template_name = 'main/income_edit.html'
     fields = ('month', 'value',)
     success_url = reverse_lazy('incomes')
 
 
-class IncomeDeleteView(views.DeleteView):
+class IncomeDeleteView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = Income
     template_name = 'main/income_confirm_delete.html'
     success_url = reverse_lazy('incomes')
 
 
-class ExpensesView(views.ListView):
+class ExpensesView(auth_mixins.LoginRequiredMixin, views.ListView):
     model = Expense
     template_name = 'main/expenses.html'
     context_object_name = 'expenses'
 
 
-class ExpenseCreateView(views.CreateView):
+class ExpenseCreateView(auth_mixins.LoginRequiredMixin, views.CreateView):
     model = Expense
     template_name = 'main/expense_create.html'
     success_url = reverse_lazy('expenses')
@@ -106,14 +106,14 @@ class ExpenseCreateView(views.CreateView):
         return kwargs
 
 
-class ExpenseEditView(views.UpdateView):
+class ExpenseEditView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = Expense
     template_name = 'main/expense_edit.html'
     fields = ('month', 'value',)
     success_url = reverse_lazy('expenses')
 
 
-class ExpenseDeleteView(views.DeleteView):
+class ExpenseDeleteView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = Expense
     template_name = 'main/expense_delete.html'
     success_url = reverse_lazy('expenses')
