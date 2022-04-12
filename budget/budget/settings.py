@@ -68,13 +68,24 @@ WSGI_APPLICATION = 'budget.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'budget_db',
+#         'USER': 'postgres',
+#         'PASSWORD': '1123QwER',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'budget_db',
-        'USER': 'postgres',
-        'PASSWORD': '1123QwER',
-        'HOST': '127.0.0.1',
+        'NAME': 'dal7ubi76qhbo0',
+        'USER': 'pdmihkwdluumrs',
+        'PASSWORD': '9d7f11cbaadcbad22c4eaac6f86296fa8275cb8632ba6aeedfe47c682eea9427',
+        'HOST': 'ec2-52-18-116-67.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
     }
 }
