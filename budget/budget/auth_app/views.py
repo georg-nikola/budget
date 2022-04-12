@@ -49,8 +49,9 @@ class EditProfileView(views.UpdateView):
     success_url = reverse_lazy('index')
 
 
-class DeleteProfileView(auth_views.FormView):
-    pass
+class DeleteProfileView(views.DeleteView):
+    model = Profile
+    success_url = reverse_lazy('logout')
 
 
 class UserLogoutView(auth_views.LogoutView):
