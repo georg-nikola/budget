@@ -35,6 +35,8 @@
                 <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'change password' %}">Change Password</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'profile details' request.user.id %}">Profile</a></li>
             </ul>
         </div>
     </div>
@@ -54,6 +56,6 @@
 <!-- * *                               SB Forms JS                               * *-->
 <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+{#<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>#}
 </body>
 </html>
