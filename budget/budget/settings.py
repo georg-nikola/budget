@@ -132,10 +132,10 @@ STATIC_URL = '/static/'
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
     BASE_DIR / 'static',
-    'static/assets/img',
-    'static/assets',
-    'static/css',
-    'static/js',
+    BASE_DIR / 'static/assets/img',
+    BASE_DIR / 'static/assets',
+    BASE_DIR / 'static/css',
+    BASE_DIR / 'static/js',
 )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
