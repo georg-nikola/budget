@@ -1,5 +1,7 @@
 from django.urls import path
 
+from budget.main.views import HomeView
+
 urlpatterns = (
-    path('', )
+    path('', HomeView.as_view(), name='index'),
 )
