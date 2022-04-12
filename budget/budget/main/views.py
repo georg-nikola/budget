@@ -16,7 +16,11 @@ class ContactsView(views.TemplateView):
     template_name = 'main/contacts.html'
 
 
-class BudgetView(views.TemplateView):
+class BudgetsView(views.ListView):
+    template_name = 'main/budget.html'
+
+
+class BudgetDetailsView(views.TemplateView):
     template_name = 'main/budget.html'
 
 
