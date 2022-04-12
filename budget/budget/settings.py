@@ -28,7 +28,7 @@ THIRD_PARTY_APPS = ()
 
 BUDGET_APPS = (
     'budget.main',
-    'budget.auth_app'
+    'budget.auth_app',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + BUDGET_APPS
@@ -113,6 +113,10 @@ STATIC_URL = '/static/'
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
     BASE_DIR / 'static',
+    'static/assets/img',
+    'static/assets',
+    'static/css',
+    'static/js',
 )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
