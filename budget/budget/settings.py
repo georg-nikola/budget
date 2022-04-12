@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -131,11 +132,11 @@ STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    BASE_DIR / 'static',
-    BASE_DIR / 'static/assets/img',
-    BASE_DIR / 'static/assets',
-    BASE_DIR / 'static/css',
-    BASE_DIR / 'static/js',
+    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static/assets/img'),
+    os.path.join(BASE_DIR, 'static/assets'),
+    os.path.join(BASE_DIR, 'static/css'),
+    os.path.join(BASE_DIR, 'static/js'),
 )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
