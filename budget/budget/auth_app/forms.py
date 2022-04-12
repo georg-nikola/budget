@@ -1,8 +1,5 @@
-from datetime import date
-
 from django import forms
 from django.contrib.auth import forms as auth_forms, get_user_model
-from django.core.exceptions import ValidationError
 
 from budget.auth_app.models import Profile
 from budget.common.helpers import BootstrapFormMixin
@@ -51,4 +48,31 @@ class CreateProfileForm(BootstrapFormMixin, auth_forms.UserCreationForm):
                     'placeholder': 'Enter last name'
                 }
             ),
+        }
+
+
+class EditProfileForm(BootstrapFormMixin, forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._init_bootstrap_form_controls()
+
+    class Meta:
+        model = Profile
+        fields = ('first_name', 'last_name', 'email')
+        widgets = {
+            'first_name': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter first name',
+                }
+            ),
+            'last_name': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter last name',
+                }
+            ),
+            'email': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter email',
+                }
+            )
         }

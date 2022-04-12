@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views import generic as views
 from django.contrib.auth import mixins as auth_mixins
 
-from budget.auth_app.forms import CreateProfileForm
+from budget.auth_app.forms import CreateProfileForm, EditProfileForm
 from budget.auth_app.models import Profile
 
 
@@ -42,8 +42,11 @@ class ChangeUserPasswordView(auth_views.PasswordChangeView):
     template_name = 'auth_app/change_password.html'
 
 
-class EditProfileView(auth_views.FormView):
-    pass
+class EditProfileView(views.UpdateView):
+    model = Profile
+    template_name = 'auth_app/profile_edit.html'
+    form_class = EditProfileForm
+    success_url = reverse_lazy('index')
 
 
 class DeleteProfileView(auth_views.FormView):
@@ -51,4 +54,4 @@ class DeleteProfileView(auth_views.FormView):
 
 
 class UserLogoutView(auth_views.LogoutView):
-    pass
+    next_page = reverse_lazy('index')
