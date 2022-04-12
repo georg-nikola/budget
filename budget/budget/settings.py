@@ -28,7 +28,7 @@ THIRD_PARTY_APPS = ()
 
 BUDGET_APPS = (
     'budget.main',
-    'budget.auth',
+    'budget.auth_app'
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + BUDGET_APPS
