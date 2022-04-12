@@ -9,17 +9,17 @@
                     <div class="text-center h-100 project">
                         <div class="d-flex h-100">
                             <div class="project-text w-100 my-auto text-center text-lg-left">
-                                {% if expenses %}
-                                    {% for expense in expenses %}
-                                        <h5 class="text-white">Expense for the month of {{ expense.month }}
-                                            with value {{ expense.value }} </h5>>
-                                        <a href="{% url 'expense edit' expense.pk %}" class="btn btn-secondary">Edit</a>
-                                        <a href="{% url 'expense delete' expense.pk %}" class="btn btn-danger">Delete</a>
+                                {% if budgets %}
+                                    {% for budget in budgets %}
+                                        <h5 class="text-white">Budget for the month of {{ budget.month }}
+                                            is {{ budget.value }} </h5>>
+                                        <a href="{% url 'budget edit' budget.pk %}" class="btn btn-secondary">Edit</a>
+                                        <a href="{% url 'budget delete' budget.pk %}" class="btn btn-danger">Delete</a>
                                     {% endfor %}
                                 {% else %}
-                                    <h5 class="text-white">No expenses added</h5>>
+                                    <h5 class="text-white">No budgets added</h5>>
                                 {% endif %}
-                                <a href="{% url 'expense create' %}" class="btn btn-primary">Add expense</a>
+                                <a href="{% url 'budget create' %}" class="btn btn-primary">Add budget</a>
                             </div>
                         </div>
                     </div>

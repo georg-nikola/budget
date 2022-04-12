@@ -4,11 +4,11 @@
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5">
                 <div class="col-md-10 col-lg-8 mx-auto text-center">
-                    <h2 class="text-white mb-5">Expense for month of {{ expense.month }} with value {{ expense.value }}</h2>
+                    <h2 class="text-white mb-5">Income for month of {{ income.month }} with value {{ income.value }}</h2>
                     <form class="form-signup" id="contactForm" method="post"
-                          action="{% url 'expense delete' expense.pk %}">
+                          action="{% url 'income delete' income.pk %}">
                         {% csrf_token %}
-                        <p>Are you sure you want to delete this expense?</p>
+                        <p>Are you sure you want to delete this income?</p>
                         {{ form }}
                         <button class="btn btn-primary" id="submitButton" type="submit">Delete</button>
                     </form>

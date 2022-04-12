@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_content %}
+    <section class="projects-section bg-dark" id="projects">
+        <div class="container px-4 px-lg-5">
+            <!-- Project One Row-->
+            <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+                <div class="col-lg-6">
+                    <div class="text-center h-100 project">
+                        <div class="d-flex h-100">
+                            <div class="project-text w-100 my-auto text-center text-lg-left">
+                                {% if incomes %}
+                                    {% for income in incomes %}
+                                        <h5 class="text-white">Income for the month of {{ income.month }}
+                                            with value {{ income.value }} </h5>>
+                                        <a href="{% url 'income edit' income.pk %}" class="btn btn-secondary">Edit</a>
+                                        <a href="{% url 'income delete' income.pk %}" class="btn btn-danger">Delete</a>
+                                    {% endfor %}
+                                {% else %}
+                                    <h5 class="text-white">No incomes added</h5>>
+                                {% endif %}
+                                <a href="{% url 'income create' %}" class="btn btn-primary">Add income</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

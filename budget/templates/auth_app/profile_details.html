@@ -16,7 +16,7 @@
                                 {% endif %}
                                 {% if is_owner %}
                                     <a href="{% url 'change password' %}" class="btn btn-primary">Change Password</a>
-                                    <a href="{% url 'edit profile' profile.pk %}" class="btn btn-primary">Edit</a>
+                                    <a href="{% url 'edit profile' profile.pk %}" class="btn btn-secondary">Edit</a>
                                     <a href="{% url 'delete profile' profile.pk %}" class="btn btn-danger">Delete</a>
                                 {% endif %}
                             </div>

@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic as views
+from django.contrib.auth import mixins as auth_mixins
+
+from budget.main.forms import CreateBudgetForm, CreateIncomeForm, CreateExpenseForm
+from budget.main.models import Budget, Income, Expense
 
 
 class HomeView(views.TemplateView):
@@ -16,64 +20,100 @@ class ContactsView(views.TemplateView):
     template_name = 'main/contacts.html'
 
 
-class BudgetsView(views.ListView):
-    template_name = 'main/budget.html'
+class BudgetsView(auth_mixins.LoginRequiredMixin, views.ListView):
+    model = Budget
+    template_name = 'main/budgets.html'
+    context_object_name = 'budgets'
 
 
-class BudgetDetailsView(views.TemplateView):
-    template_name = 'main/budget_details.html'
-
-
-class BudgetCreateView(views.CreateView):
+class BudgetCreateView(auth_mixins.LoginRequiredMixin, views.CreateView):
+    model = Budget
+    form_class = CreateBudgetForm
     template_name = 'main/budget_create.html'
-    success_url = reverse_lazy('budget')
+    success_url = reverse_lazy('budgets')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['is_owner'] = self.object.user == self.request.user
+    #     return context
 
 
-class BudgetEditView(views.UpdateView):
+class BudgetEditView(auth_mixins.LoginRequiredMixin, views.UpdateView):
+    model = Budget
+    fields = ('month', 'value',)
     template_name = 'main/budget_edit.html'
-    success_url = reverse_lazy('budget')
+
+    success_url = reverse_lazy('budgets')
 
 
-class BudgetDeleteView(views.DeleteView):
-    template_name = 'main/budget_delete.html'
-    success_url = reverse_lazy('budget')
+class BudgetDeleteView(auth_mixins.LoginRequiredMixin, views.DeleteView):
+    model = Budget
+    template_name = 'main/budget_confirm_delete.html'
+    success_url = reverse_lazy('budgets')
 
 
-class IncomesView(views.ListView):
+class IncomesView(auth_mixins.LoginRequiredMixin, views.ListView):
+    model = Income
     template_name = 'main/incomes.html'
-
-
-class IncomeDetailsView(views.TemplateView):
-    template_name = 'main/income_details.html'
+    context_object_name = 'incomes'
 
 
 class IncomeCreateView(views.CreateView):
+    model = Income
     template_name = 'main/income_create.html'
+    form_class = CreateIncomeForm
+    success_url = reverse_lazy('incomes')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
 
-class IncomeEditView(views.TemplateView):
+class IncomeEditView(views.UpdateView):
+    model = Income
     template_name = 'main/income_edit.html'
+    fields = ('month', 'value',)
+    success_url = reverse_lazy('incomes')
 
 
-class IncomeDeleteView(views.TemplateView):
-    template_name = 'main/income_delete.html'
+class IncomeDeleteView(views.DeleteView):
+    model = Income
+    template_name = 'main/income_confirm_delete.html'
+    success_url = reverse_lazy('incomes')
 
 
 class ExpensesView(views.ListView):
+    model = Expense
     template_name = 'main/expenses.html'
-
-
-class ExpenseDetailsView(views.TemplateView):
-    template_name = 'main/expense_details.html'
+    context_object_name = 'expenses'
 
 
 class ExpenseCreateView(views.CreateView):
+    model = Expense
     template_name = 'main/expense_create.html'
+    success_url = reverse_lazy('expenses')
+    form_class = CreateExpenseForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
 
 class ExpenseEditView(views.UpdateView):
+    model = Expense
     template_name = 'main/expense_edit.html'
+    fields = ('month', 'value',)
+    success_url = reverse_lazy('expenses')
 
 
-class ExpenseDeleteView(views.DetailView):
+class ExpenseDeleteView(views.DeleteView):
+    model = Expense
     template_name = 'main/expense_delete.html'
+    success_url = reverse_lazy('expenses')
