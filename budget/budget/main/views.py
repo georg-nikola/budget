@@ -21,21 +21,21 @@ class BudgetsView(views.ListView):
 
 
 class BudgetDetailsView(views.TemplateView):
-    template_name = 'main/budget.html'
+    template_name = 'main/budget_details.html'
 
 
 class BudgetCreateView(views.CreateView):
-    template_name = 'main/budget-create.html'
+    template_name = 'main/budget_create.html'
     success_url = reverse_lazy('budget')
 
 
 class BudgetEditView(views.UpdateView):
-    template_name = 'main/budget-edit.html'
+    template_name = 'main/budget_edit.html'
     success_url = reverse_lazy('budget')
 
 
 class BudgetDeleteView(views.DeleteView):
-    template_name = 'main/budget-delete.html'
+    template_name = 'main/budget_delete.html'
     success_url = reverse_lazy('budget')
 
 
@@ -44,19 +44,19 @@ class IncomesView(views.ListView):
 
 
 class IncomeDetailsView(views.TemplateView):
-    template_name = 'main/income-details.html'
+    template_name = 'main/income_details.html'
 
 
 class IncomeCreateView(views.CreateView):
-    template_name = 'main/income-create.html'
+    template_name = 'main/income_create.html'
 
 
 class IncomeEditView(views.TemplateView):
-    template_name = 'main/income-edit.html'
+    template_name = 'main/income_edit.html'
 
 
 class IncomeDeleteView(views.TemplateView):
-    template_name = 'main/income-delete.html'
+    template_name = 'main/income_delete.html'
 
 
 class ExpensesView(views.ListView):
@@ -64,16 +64,16 @@ class ExpensesView(views.ListView):
 
 
 class ExpenseDetailsView(views.TemplateView):
-    template_name = 'main/expense-details.html'
+    template_name = 'main/expense_details.html'
 
 
 class ExpenseCreateView(views.CreateView):
-    template_name = 'main/expense-create.html'
+    template_name = 'main/expense_create.html'
 
 
 class ExpenseEditView(views.UpdateView):
-    template_name = 'main/expense-edit.html'
+    template_name = 'main/expense_edit.html'
 
 
 class ExpenseDeleteView(views.DetailView):
-    template_name = 'main/expense-delete.html'
+    template_name = 'main/expense_delete.html'
