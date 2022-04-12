@@ -48,3 +48,7 @@ class EditProfileView(auth_views.FormView):
 
 class DeleteProfileView(auth_views.FormView):
     pass
+
+
+class UserLogoutView(auth_views.LogoutView):
+    pass

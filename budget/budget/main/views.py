@@ -9,3 +9,7 @@ class HomeView(views.TemplateView):
         context = super().get_context_data(**kwargs)
         context['hide_additional_nav_items'] = True
         return context
+
+
+class ContactsView(views.TemplateView):
+    template_name = 'main/contacts.html'

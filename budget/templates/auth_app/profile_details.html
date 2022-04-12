@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block page_content %}
-    <section class="projects-section bg-light" id="projects">
+    <section class="projects-section bg-dark" id="projects">
         <div class="container px-4 px-lg-5">
             <!-- Project One Row-->
             <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
@@ -9,10 +9,10 @@
                     <div class="text-center h-100 project">
                         <div class="d-flex h-100">
                             <div class="project-text w-100 my-auto text-center text-lg-left">
-                                <h5 class="text-black"><u>Name:</u> {{ profile.first_name }} {{ profile.last_name }}
+                                <h5 class="text-white"><u>Name:</u> {{ profile.first_name }} {{ profile.last_name }}
                                 </h5>
                                 {% if profile.email %}
-                                    <h5><u>Email:</u> {{ profile.email }}</h5>
+                                    <h5 class="text-white"><u>Email:</u> {{ profile.email }}</h5>
                                 {% endif %}
                                 {% if is_owner %}
                                     <a href="{% url 'change password' %}" class="btn btn-primary">Change Password</a>
