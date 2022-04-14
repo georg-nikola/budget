@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 import environ
+
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False)
@@ -16,16 +17,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = None
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = None
 
-ALLOWED_HOSTS = [
-    'budget-project-demo.herokuapp.com',
-    '127.0.0.1',
-    'localhost'
-]
+ALLOWED_HOSTS = None
 
 # Application definition
 DJANGO_APPS = (
@@ -92,16 +89,44 @@ WSGI_APPLICATION = 'budget.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASS'),
-        'HOST': env('DB_URL'),
-        'PORT': '5432',
+DATABASES = None
+if os.getenv('APP_ENVIRONMENT') == 'production':
+    SECRET_KEY = os.getenv('SECRET_KEY')
+
+    DEBUG = os.getenv('DEBUG') == 'True'
+
+    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASS'),
+            'HOST': os.getenv('DB_URL'),
+            'PORT': '5432',
+        }
     }
-}
+else:
+    SECRET_KEY = 'pft%$g(z2=9!w8z&yuiehrfrjwhxv6oj6^!96w-dq(v#2x-$ih'
+
+    DEBUG = True
+
+    ALLOWED_HOSTS = [
+        '127.0.0.1',
+        'localhost'
+    ]
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'budget_db',
+            'USER': 'postgres',
+            'PASSWORD': '1123QwER',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
