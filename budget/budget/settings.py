@@ -105,6 +105,7 @@ if os.getenv('APP_ENVIRONMENT') == 'production':
             'PORT': '5432',
         }
     }
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 else:
     SECRET_KEY = 'pft%$g(z2=9!w8z&yuiehrfrjwhxv6oj6^!96w-dq(v#2x-$ih'
 
@@ -125,6 +126,7 @@ else:
             'PORT': '5432',
         }
     }
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -171,7 +173,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static/js'),
 )
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_ROOT = BASE_DIR / 'meadiafiles'
 MEDIA_URL = '/media/'
