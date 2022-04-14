@@ -92,9 +92,7 @@ WSGI_APPLICATION = 'budget.wsgi.application'
 DATABASES = None
 if os.getenv('APP_ENVIRONMENT') == 'production':
     SECRET_KEY = os.getenv('SECRET_KEY')
-
     DEBUG = os.getenv('DEBUG') == 'True'
-
     ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
 
     DATABASES = {
