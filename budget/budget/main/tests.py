@@ -13,6 +13,11 @@ VALID_USER_CREDENTIALS = {
 
 
 class BudgetViewsTests(django_test.TestCase):
+    VALID_BUDGET = {
+        'month': 'January',
+        'value': 10,
+    }
+
     def test_when_user_is_logged_in__expect_can_open_budgets_page(self):
         UserModel.objects.create_user(**VALID_USER_CREDENTIALS)
         self.client.login(**VALID_USER_CREDENTIALS)
@@ -29,8 +34,20 @@ class BudgetViewsTests(django_test.TestCase):
         response = self.client.get(reverse('budget create'))
         self.assertTemplateUsed('main/budget_create.html')
 
+    def test_when_user_is_logged_in__expect_can_create_budget_and_owner_is_true(self):
+        user = UserModel.objects.create_user(**VALID_USER_CREDENTIALS)
+        self.client.login(**VALID_USER_CREDENTIALS)
+        expense = Expense.objects.create(**self.VALID_BUDGET, user=user)
+        response = self.client.get(reverse('expense edit', kwargs={'pk': expense.pk}))
+        self.assertTrue(response.context['is_owner'])
+
 
 class IncomeViewsTests(django_test.TestCase):
+    VALID_INCOME = {
+        'month': 'January',
+        'value': 10,
+    }
+
     def test_when_user_is_logged_in__expect_can_open_incomes_page(self):
         UserModel.objects.create_user(**VALID_USER_CREDENTIALS)
         self.client.login(**VALID_USER_CREDENTIALS)
@@ -47,8 +64,20 @@ class IncomeViewsTests(django_test.TestCase):
         response = self.client.get(reverse('income create'))
         self.assertTemplateUsed('main/income_create.html')
 
+    def test_when_user_is_logged_in__expect_can_create_income_and_owner_is_true(self):
+        user = UserModel.objects.create_user(**VALID_USER_CREDENTIALS)
+        self.client.login(**VALID_USER_CREDENTIALS)
+        expense = Expense.objects.create(**self.VALID_INCOME, user=user)
+        response = self.client.get(reverse('expense edit', kwargs={'pk': expense.pk}))
+        self.assertTrue(response.context['is_owner'])
+
 
 class ExpenseViewsTests(django_test.TestCase):
+    VALID_EXPENSE = {
+        'month': 'January',
+        'value': 10,
+    }
+
     def test_when_user_is_logged_in__expect_can_open_expenses_page(self):
         UserModel.objects.create_user(**VALID_USER_CREDENTIALS)
         self.client.login(**VALID_USER_CREDENTIALS)
@@ -64,3 +93,10 @@ class ExpenseViewsTests(django_test.TestCase):
         self.client.login(**VALID_USER_CREDENTIALS)
         response = self.client.get(reverse('income create'))
         self.assertTemplateUsed('main/income_create.html')
+
+    def test_when_user_is_logged_in__expect_can_create_expense_and_owner_is_true(self):
+        user = UserModel.objects.create_user(**VALID_USER_CREDENTIALS)
+        self.client.login(**VALID_USER_CREDENTIALS)
+        expense = Expense.objects.create(**self.VALID_EXPENSE, user=user)
+        response = self.client.get(reverse('expense edit', kwargs={'pk': expense.pk}))
+        self.assertTrue(response.context['is_owner'])
