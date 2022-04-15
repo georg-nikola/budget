@@ -94,7 +94,6 @@ if os.getenv('APP_ENVIRONMENT') == 'production':
     SECRET_KEY = os.getenv('SECRET_KEY')
     DEBUG = os.getenv('DEBUG') == 'True'
     ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -108,7 +107,6 @@ if os.getenv('APP_ENVIRONMENT') == 'production':
 else:
     SECRET_KEY = 'pft%$g(z2=9!w8z&yuiehrfrjwhxv6oj6^!96w-dq(v#2x-$ih'
     DEBUG = True
-    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
     ALLOWED_HOSTS = [
         '127.0.0.1',
         'localhost'
@@ -169,7 +167,10 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static/js'),
 )
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+if os.getenv('APP_ENVIRONMENT') == 'production':
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+else:
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 MEDIA_ROOT = BASE_DIR / 'meadiafiles'
 MEDIA_URL = '/media/'
