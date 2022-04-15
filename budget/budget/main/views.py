@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.views import generic as views
 from django.contrib.auth import mixins as auth_mixins
 
+from budget.common.view_mixins import AuthorizeUserAction
 from budget.main.forms import CreateBudgetForm, CreateIncomeForm, CreateExpenseForm
 from budget.main.models import Budget, Income, Expense
 
@@ -41,7 +42,7 @@ class BudgetCreateView(auth_mixins.LoginRequiredMixin, views.CreateView):
         return kwargs
 
 
-class BudgetEditView(auth_mixins.LoginRequiredMixin, views.UpdateView):
+class BudgetEditView(AuthorizeUserAction, auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = Budget
     fields = ('month', 'value',)
     template_name = 'main/budget_edit.html'
@@ -49,7 +50,7 @@ class BudgetEditView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     success_url = reverse_lazy('budgets')
 
 
-class BudgetDeleteView(auth_mixins.LoginRequiredMixin, views.DeleteView):
+class BudgetDeleteView(AuthorizeUserAction, auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = Budget
     template_name = 'main/budget_confirm_delete.html'
     success_url = reverse_lazy('budgets')
@@ -76,14 +77,14 @@ class IncomeCreateView(auth_mixins.LoginRequiredMixin, views.CreateView):
         return kwargs
 
 
-class IncomeEditView(auth_mixins.LoginRequiredMixin, views.UpdateView):
+class IncomeEditView(AuthorizeUserAction, auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = Income
     template_name = 'main/income_edit.html'
     fields = ('month', 'value',)
     success_url = reverse_lazy('incomes')
 
 
-class IncomeDeleteView(auth_mixins.LoginRequiredMixin, views.DeleteView):
+class IncomeDeleteView(AuthorizeUserAction, auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = Income
     template_name = 'main/income_confirm_delete.html'
     success_url = reverse_lazy('incomes')
@@ -110,14 +111,14 @@ class ExpenseCreateView(auth_mixins.LoginRequiredMixin, views.CreateView):
         return kwargs
 
 
-class ExpenseEditView(auth_mixins.LoginRequiredMixin, views.UpdateView):
+class ExpenseEditView(AuthorizeUserAction, auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = Expense
     template_name = 'main/expense_edit.html'
     fields = ('month', 'value',)
     success_url = reverse_lazy('expenses')
 
 
-class ExpenseDeleteView(auth_mixins.LoginRequiredMixin, views.DeleteView):
+class ExpenseDeleteView(AuthorizeUserAction, auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = Expense
     template_name = 'main/expense_delete.html'
     success_url = reverse_lazy('expenses')
