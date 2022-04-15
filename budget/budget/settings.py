@@ -90,6 +90,7 @@ WSGI_APPLICATION = 'budget.wsgi.application'
 # }
 
 DATABASES = None
+print(os.getenv('APP_ENVIRONMENT'))
 if os.getenv('APP_ENVIRONMENT') == 'production':
     SECRET_KEY = os.getenv('SECRET_KEY')
     DEBUG = os.getenv('DEBUG') == 'True'
