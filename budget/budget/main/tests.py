@@ -12,7 +12,7 @@ VALID_USER_CREDENTIALS = {
 }
 
 
-class BudgetsViewTests(django_test.TestCase):
+class BudgetViewsTests(django_test.TestCase):
     def test_when_user_is_logged_in__expect_can_open_budgets_page(self):
         UserModel.objects.create_user(**VALID_USER_CREDENTIALS)
         self.client.login(**VALID_USER_CREDENTIALS)
@@ -23,8 +23,14 @@ class BudgetsViewTests(django_test.TestCase):
         response = self.client.get(reverse('budgets'))
         self.assertEqual(response.status_code, 302)
 
+    def test_when_user_is_logged_in__expect_can_open_budget_create_page(self):
+        UserModel.objects.create_user(**VALID_USER_CREDENTIALS)
+        self.client.login(**VALID_USER_CREDENTIALS)
+        response = self.client.get(reverse('budget create'))
+        self.assertTemplateUsed('main/budget_create.html')
 
-class IncomesViewTests(django_test.TestCase):
+
+class IncomeViewsTests(django_test.TestCase):
     def test_when_user_is_logged_in__expect_can_open_incomes_page(self):
         UserModel.objects.create_user(**VALID_USER_CREDENTIALS)
         self.client.login(**VALID_USER_CREDENTIALS)
@@ -35,8 +41,14 @@ class IncomesViewTests(django_test.TestCase):
         response = self.client.get(reverse('incomes'))
         self.assertEqual(response.status_code, 302)
 
+    def test_when_user_is_logged_in__expect_can_open_income_create_page(self):
+        UserModel.objects.create_user(**VALID_USER_CREDENTIALS)
+        self.client.login(**VALID_USER_CREDENTIALS)
+        response = self.client.get(reverse('income create'))
+        self.assertTemplateUsed('main/income_create.html')
 
-class ExpensesViewTests(django_test.TestCase):
+
+class ExpenseViewsTests(django_test.TestCase):
     def test_when_user_is_logged_in__expect_can_open_expenses_page(self):
         UserModel.objects.create_user(**VALID_USER_CREDENTIALS)
         self.client.login(**VALID_USER_CREDENTIALS)
@@ -46,3 +58,9 @@ class ExpensesViewTests(django_test.TestCase):
     def test_when_opening_expenses_and_not_logged_in__expect_302(self):
         response = self.client.get(reverse('expenses'))
         self.assertEqual(response.status_code, 302)
+
+    def test_when_user_is_logged_in__expect_can_open_expense_create_page(self):
+        UserModel.objects.create_user(**VALID_USER_CREDENTIALS)
+        self.client.login(**VALID_USER_CREDENTIALS)
+        response = self.client.get(reverse('income create'))
+        self.assertTemplateUsed('main/income_create.html')
