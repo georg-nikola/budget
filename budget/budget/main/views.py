@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic as views
 from django.contrib.auth import mixins as auth_mixins
+from django.db.models import Sum
 
 from budget.common.view_mixins import AuthorizeUserAction
 from budget.main.forms import CreateBudgetForm, CreateIncomeForm, CreateExpenseForm
@@ -122,3 +123,20 @@ class ExpenseDeleteView(AuthorizeUserAction, auth_mixins.LoginRequiredMixin, vie
     model = Expense
     template_name = 'main/expense_confirm_delete.html'
     success_url = reverse_lazy('expenses')
+
+
+class AllView(auth_mixins.LoginRequiredMixin, views.ListView):
+    model = Budget
+    template_name = 'main/all.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AllView, self).get_context_data(**kwargs)
+        total_budgets = Budget.objects.filter(user=self.request.user).aggregate(Sum('value'))
+        total_incomes = Income.objects.filter(user=self.request.user).aggregate(Sum('value'))
+        total_expenses = Expense.objects.filter(user=self.request.user).aggregate(Sum('value'))
+        context.update({
+            'total_budgets': total_budgets['value__sum'],
+            'total_incomes': total_incomes['value__sum'],
+            'total_expenses': total_expenses['value__sum']
+        })
+        return context

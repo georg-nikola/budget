@@ -2,7 +2,7 @@ from django.urls import path
 
 from budget.main.views import HomeView, ContactsView, IncomesView, BudgetCreateView, BudgetEditView, \
     BudgetDeleteView, IncomeCreateView, IncomeEditView, IncomeDeleteView, ExpensesView, ExpenseCreateView, \
-    ExpenseEditView, ExpenseDeleteView, BudgetsView
+    ExpenseEditView, ExpenseDeleteView, BudgetsView, AllView
 
 urlpatterns = (
     path('', HomeView.as_view(), name='index'),
@@ -22,4 +22,6 @@ urlpatterns = (
     path('expense-create/', ExpenseCreateView.as_view(), name='expense create'),
     path('expense-edit/<int:pk>/', ExpenseEditView.as_view(), name='expense edit'),
     path('expense-delete/<int:pk>/', ExpenseDeleteView.as_view(), name='expense delete'),
+
+    path('all/', AllView.as_view(), name='all'),
 )
