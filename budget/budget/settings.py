@@ -90,7 +90,6 @@ WSGI_APPLICATION = 'budget.wsgi.application'
 # }
 
 DATABASES = None
-print(os.getenv('APP_ENVIRONMENT'))
 if os.getenv('APP_ENVIRONMENT') == 'production':
     SECRET_KEY = os.getenv('SECRET_KEY')
     DEBUG = os.getenv('DEBUG') == 'True'
@@ -170,14 +169,13 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static/js'),
 )
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_ROOT = BASE_DIR / 'meadiafiles'
 MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
