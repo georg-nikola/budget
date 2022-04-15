@@ -94,7 +94,7 @@ if os.getenv('APP_ENVIRONMENT') == 'production':
     SECRET_KEY = os.getenv('SECRET_KEY')
     DEBUG = os.getenv('DEBUG') == 'True'
     ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
-
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -105,17 +105,14 @@ if os.getenv('APP_ENVIRONMENT') == 'production':
             'PORT': '5432',
         }
     }
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 else:
     SECRET_KEY = 'pft%$g(z2=9!w8z&yuiehrfrjwhxv6oj6^!96w-dq(v#2x-$ih'
-
     DEBUG = True
-
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
     ALLOWED_HOSTS = [
         '127.0.0.1',
         'localhost'
     ]
-
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -126,7 +123,6 @@ else:
             'PORT': '5432',
         }
     }
-    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
