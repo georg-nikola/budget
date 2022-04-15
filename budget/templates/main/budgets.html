@@ -13,8 +13,10 @@
                                     {% for budget in budgets %}
                                         <h5 class="text-white">Budget for the month of {{ budget.month }}
                                             is {{ budget.value }} </h5>>
-                                        <a href="{% url 'budget edit' budget.pk %}" class="btn btn-secondary">Edit</a>
-                                        <a href="{% url 'budget delete' budget.pk %}" class="btn btn-danger">Delete</a>
+                                        <a href="{% url 'budget edit' budget.pk %}"
+                                           class="btn btn-secondary">Edit</a>
+                                        <a href="{% url 'budget delete' budget.pk %}"
+                                           class="btn btn-danger">Delete</a>
                                     {% endfor %}
                                 {% else %}
                                     <h5 class="text-white">No budgets added</h5>>

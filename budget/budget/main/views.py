@@ -25,6 +25,9 @@ class BudgetsView(auth_mixins.LoginRequiredMixin, views.ListView):
     template_name = 'main/budgets.html'
     context_object_name = 'budgets'
 
+    def get_queryset(self):
+        return Budget.objects.filter(user=self.request.user)
+
 
 class BudgetCreateView(auth_mixins.LoginRequiredMixin, views.CreateView):
     model = Budget
@@ -36,11 +39,6 @@ class BudgetCreateView(auth_mixins.LoginRequiredMixin, views.CreateView):
         kwargs = super().get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['is_owner'] = self.object.user == self.request.user
-    #     return context
 
 
 class BudgetEditView(auth_mixins.LoginRequiredMixin, views.UpdateView):
@@ -61,6 +59,9 @@ class IncomesView(auth_mixins.LoginRequiredMixin, views.ListView):
     model = Income
     template_name = 'main/incomes.html'
     context_object_name = 'incomes'
+
+    def get_queryset(self):
+        return Income.objects.filter(user=self.request.user)
 
 
 class IncomeCreateView(auth_mixins.LoginRequiredMixin, views.CreateView):
@@ -92,6 +93,9 @@ class ExpensesView(auth_mixins.LoginRequiredMixin, views.ListView):
     model = Expense
     template_name = 'main/expenses.html'
     context_object_name = 'expenses'
+
+    def get_queryset(self):
+        return Expense.objects.filter(user=self.request.user)
 
 
 class ExpenseCreateView(auth_mixins.LoginRequiredMixin, views.CreateView):
