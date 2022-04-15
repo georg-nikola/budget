@@ -4,13 +4,17 @@
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5">
                 <div class="col-md-10 col-lg-8 mx-auto text-center">
-                    <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
-                    <h2 class="text-white mb-5">Income</h2>
-                    <form class="form-signup" id="contactForm" method="post" action="{% url 'income edit' income.pk %}">
-                        {% csrf_token %}
-                        {{ form }}
-                        <button class="btn btn-primary" id="submitButton" type="submit">Edit income</button>
-                    </form>
+                    {% if is_owner %}
+                        <h2 class="text-white mb-5">Income</h2>
+                        <form class="form-signup" id="contactForm" method="post"
+                              action="{% url 'income edit' income.pk %}">
+                            {% csrf_token %}
+                            {{ form }}
+                            <button class="btn btn-primary" id="submitButton" type="submit">Edit income</button>
+                        </form>
+                    {% else %}
+                        <h2 class="text-white mb-5">You are not the owner of this income</h2>
+                    {% endif %}
                 </div>
             </div>
         </div>

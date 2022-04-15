@@ -120,5 +120,5 @@ class ExpenseEditView(AuthorizeUserAction, auth_mixins.LoginRequiredMixin, views
 
 class ExpenseDeleteView(AuthorizeUserAction, auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = Expense
-    template_name = 'main/expense_delete.html'
+    template_name = 'main/expense_confirm_delete.html'
     success_url = reverse_lazy('expenses')
