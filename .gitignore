@@ -127,3 +127,17 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#pycharm configs
+.idea
+
+# PostgreSQL
+*.pgbak
+*.pgdump
+*.pg_dump
+*.sql
+pg_log
+pg_stat_tmp
+postgresql.conf
+postmaster.pid
+postgresql/*
