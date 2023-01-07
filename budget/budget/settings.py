@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'budget.wsgi.application'
 # }
 
 DATABASES = None
-if os.getenv('APP_ENVIRONMENT') == 'production':
+if os.getenv('APP_ENVIRONMENT') == 'development':
     SECRET_KEY = os.getenv('SECRET_KEY')
     DEBUG = os.getenv('DEBUG') == 'True'
     ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
@@ -100,7 +100,7 @@ if os.getenv('APP_ENVIRONMENT') == 'production':
             'NAME': os.getenv('DB_NAME'),
             'USER': os.getenv('DB_USER'),
             'PASSWORD': os.getenv('DB_PASS'),
-            'HOST': os.getenv('DB_URL'),
+            'HOST': os.getenv('DB_HOST'),
             'PORT': '5432',
         }
     }
@@ -155,19 +155,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 # STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    # os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'static/assets/img'),
     os.path.join(BASE_DIR, 'static/assets'),
     os.path.join(BASE_DIR, 'static/css'),
     os.path.join(BASE_DIR, 'static/js'),
 )
 
-if os.getenv('APP_ENVIRONMENT') == 'production':
+if os.getenv('APP_ENVIRONMENT') == 'development':
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 else:
     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
