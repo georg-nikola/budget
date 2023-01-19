@@ -1,17 +1,17 @@
-FROM python:3.8
+# Use the official Django image as the base image
+FROM python:3.8-slim-buster
 
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY requirements.txt /app
-COPY ./budget/ /app
+# copy only the requirements file
+COPY requirements.txt .
 
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
 
+# copy the rest of the files
+COPY ./budget/ /budget
+
 # Expose the port 8000
 EXPOSE 8000
-
-# Run the command to start the Django development server
-CMD ["python", "manage.py", "collectstatic ", "--no-input"]
